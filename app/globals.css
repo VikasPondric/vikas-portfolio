@@ -1,0 +1,122 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 98%;
+    --foreground: 0 0% 6%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 6%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 6%;
+    --primary: 0 0% 9%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 0 0% 94%;
+    --secondary-foreground: 0 0% 9%;
+    --muted: 0 0% 94%;
+    --muted-foreground: 0 0% 40%;
+    --accent: 32 95% 55%;
+    --accent-foreground: 0 0% 9%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 88%;
+    --input: 0 0% 88%;
+    --ring: 32 95% 55%;
+    --radius: 1rem;
+    --grid-color: rgba(0,0,0,0.04);
+  }
+  .dark {
+    --background: 0 0% 4%;
+    --foreground: 0 0% 96%;
+    --card: 0 0% 6%;
+    --card-foreground: 0 0% 96%;
+    --popover: 0 0% 6%;
+    --popover-foreground: 0 0% 96%;
+    --primary: 0 0% 96%;
+    --primary-foreground: 0 0% 9%;
+    --secondary: 0 0% 10%;
+    --secondary-foreground: 0 0% 96%;
+    --muted: 0 0% 10%;
+    --muted-foreground: 0 0% 60%;
+    --accent: 32 95% 60%;
+    --accent-foreground: 0 0% 9%;
+    --destructive: 0 62% 50%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 14%;
+    --input: 0 0% 14%;
+    --ring: 32 95% 60%;
+    --grid-color: rgba(255,255,255,0.05);
+  }
+  * { @apply border-border; }
+  html, body { @apply bg-background text-foreground; }
+  html { scroll-behavior: auto !important; }
+  body { font-feature-settings: 'ss01', 'cv11'; }
+  ::selection { background: hsl(var(--accent) / 0.5); color: hsl(var(--foreground)); }
+}
+
+/* Fonts */
+.font-display { font-family: var(--font-display), 'Inter', sans-serif; letter-spacing: -0.03em; }
+.font-serif-italic { font-family: var(--font-serif), Georgia, serif; font-style: italic; }
+
+/* Cursor */
+@media (pointer: fine) {
+  * { cursor: none !important; }
+}
+
+/* Noise texture */
+.noise-bg {
+  position: fixed; inset: 0; pointer-events: none; z-index: 1; opacity: 0.05; mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Grid background */
+.bg-grid {
+  background-image:
+    linear-gradient(to right, var(--grid-color) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-color) 1px, transparent 1px);
+  background-size: 80px 80px;
+}
+
+/* Glass */
+.glass {
+  background: hsl(var(--card) / 0.5);
+  backdrop-filter: blur(20px) saturate(140%);
+  -webkit-backdrop-filter: blur(20px) saturate(140%);
+  border: 1px solid hsl(var(--border) / 0.6);
+}
+
+/* Gradient text */
+.gradient-text {
+  background: linear-gradient(135deg, hsl(var(--foreground)) 0%, hsl(var(--accent)) 50%, hsl(var(--foreground)) 100%);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: shimmer 6s ease infinite;
+}
+@keyframes shimmer { 0%,100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+
+/* Floating */
+@keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-14px); } }
+.floating { animation: float 6s ease-in-out infinite; }
+
+/* Marquee */
+@keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+.marquee-track { animation: marquee 30s linear infinite; }
+
+/* Hide scrollbar on selective containers */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { scrollbar-width: none; }
+
+/* Magnetic btn transition */
+.magnetic { transition: transform 0.25s cubic-bezier(0.2, 0.9, 0.2, 1); }
+
+/* Underline hover */
+.link-underline { position: relative; }
+.link-underline::after {
+  content: ''; position: absolute; left: 0; bottom: -4px; height: 1px; width: 100%;
+  background: currentColor; transform: scaleX(0); transform-origin: right;
+  transition: transform 0.5s cubic-bezier(0.65,0,0.35,1);
+}
+.link-underline:hover::after { transform: scaleX(1); transform-origin: left; }
