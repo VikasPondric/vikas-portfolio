@@ -30,12 +30,15 @@ function ServiceCard({ s, i }) {
     <motion.div ref={ref} onMouseMove={onMove} onMouseLeave={onLeave}
       initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '-60px' }} transition={{ delay: i * 0.08, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
       style={{ x: sx, y: sy }}
-      className="group relative rounded-3xl overflow-hidden bg-card/50 backdrop-blur border border-border/60 p-8 hover:border-accent/80 transition-colors"
+      className="group relative rounded-3xl overflow-hidden bg-card/50 backdrop-blur border border-accent/80 p-8 transition-colors"
     >
-      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{ background: 'radial-gradient(400px circle at var(--mx,50%) var(--my,50%), hsl(var(--accent)/0.15), transparent 60%)' }} />
+      <div 
+  className="absolute inset-0 opacity-100 transition-opacity duration-500" 
+  style={{ background: 'radial-gradient(400px circle at 50% 50%, hsl(var(--accent)/0.15), transparent 60%)' }} 
+/>
       <div className="relative flex flex-col h-full min-h-[280px]">
         <div className="flex items-start justify-between mb-8">
-          <div className="w-14 h-14 rounded-2xl bg-foreground/5 flex items-center justify-center group-hover:bg-accent/20 group-hover:text-accent transition-colors">
+          <div className="w-14 h-14 rounded-2xl bg-accent/20 text-accent flex items-center justify-center transition-colors">
             <Icon size={22} />
           </div>
           <span className="font-mono text-xs text-muted-foreground uppercase tracking-widest">{s.tag}</span>
@@ -44,7 +47,7 @@ function ServiceCard({ s, i }) {
         <p className="text-muted-foreground leading-relaxed flex-1">{s.desc}</p>
         <div className="mt-6 flex items-center justify-between text-sm">
           <span className="link-underline text-muted-foreground group-hover:text-foreground transition">Learn more</span>
-          <div className="w-9 h-9 rounded-full border border-border flex items-center justify-center group-hover:bg-foreground group-hover:text-background group-hover:rotate-45 transition-all"><ArrowUpRight size={14} /></div>
+          <div className="w-9 h-9 rounded-full border border-border bg-foreground text-background rotate-45 flex items-center justify-center transition-all"> <ArrowUpRight size={14} /></div>
         </div>
       </div>
     </motion.div>
